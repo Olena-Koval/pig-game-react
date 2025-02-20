@@ -6,3 +6,4 @@ const Dice = ({ number }) => {
   
   export default Dice;
   
+
