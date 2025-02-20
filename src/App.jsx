@@ -4,13 +4,18 @@ import Player from './components/Player'
 import Dice from './components/Dice'
 
 const App = () => {
+    // Estado para el jugador activo (1 o 2)
   const [activePlayer, setActivePlayer] = useState(1)
+    // Estado para el puntaje de ambos jugadores
   const [score, setScore] = useState([0, 0])
+    // Estado para el puntaje actual del jugador activo
   const [current, setCurrent] = useState(0)
+    // Estado para el número del dado
   const [diceNumber, setDiceNumber] = useState(0)
 
   // Función para manejar el lanzamiento de los dados
   const handleRollDice = () => {
+        // Generamos un número aleatorio entre 1 y 6
     const randomNumber = Math.floor(Math.random() * 6) + 1
     setDiceNumber(randomNumber)
   }
@@ -35,14 +40,17 @@ const App = () => {
   }
 
   // Lógica para manejar el cambio de jugador dependiendo del dado
+    // Efecto que maneja las acciones tras el lanzamiento del dado
   useEffect(() => {
     if (diceNumber === 1) {
+        // Si el número del dado es 1, cambia al siguiente jugador y reinicia el puntaje actual
       setActivePlayer((prev) => (prev === 1 ? 2 : 1))
       setCurrent(0)
     } else {
+        // Si el número es diferente a 1, sumamos el valor del dado al puntaje actual
       setCurrent((prev) => prev + diceNumber)
     }
-  }, [diceNumber])
+  }, [diceNumber]) // Este efecto se ejecuta cada vez que `diceNumber` cambia
 
   return (
     <main>
